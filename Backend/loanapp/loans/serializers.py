@@ -23,6 +23,13 @@ class leadSerializer(serializers.ModelSerializer):
         model = lead
         fields = "__all__"
 
+def validate_mobile(self,value):
+    if lead.objects.filter(mobile=value).exists():
+        raise serializers.ValidationError(
+            "number already exits"
+        )
+    return value
+
 
 class BRERuleSerializer(serializers.ModelSerializer):
     class Meta:
